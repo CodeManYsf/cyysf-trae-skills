@@ -1,98 +1,79 @@
-# 🎓 Trae Tutor (Ultimate Edition) - 你的 AI 专属学习导师
+# 🎓 Trae Tutor (V8.0 Ultimate) - 全栈 AI 学习导师
 
-> **架构版本**: V6.0 (Cloud-Native + Web-Aware + State-Persistent)
+> **架构版本**: V8.0 (Zero-Dependency + Cloud-Native + Context-Aware)
 > **维护者**: CodeManYsf
 
-这是一个基于 **Trae IDE** + **MCP (Model Context Protocol)** 构建的自进化学习智能体配置。它不仅仅是一个聊天机器人，而是一个拥有“手”（GitHub同步）、“眼”（联网读取）、“脑”（自动规划）和“记忆”（进度追踪）的全能导师。
+**Trae Tutor** 是一个运行在 Trae IDE 中的自进化学习智能体。它突破了传统 AI 聊天的限制，拥有**自主联网获取知识**、**持久化管理学习进度**以及**零门槛一键部署**的能力。
 
 ---
 
-## 🌟 核心特性 (Features)
+## 🌟 核心特性 (Core Features)
 
-### 1. 🧠 动态大脑 (Cloud Sync)
-- **零配置启动**：只需一句“初始化环境”，智能体自动从 GitHub 仓库 (`master` 分支) 拉取最新的技能 SOP。
-- **技能侧载 (Sideloading)**：支持直接将 `.md` 技能文件拖入对话框，实现能力的实时热更新。
+### 1. ⚡ 零依赖极速启动 (Zero-Dependency Bootstrap)
+- **无门槛**：不需要用户预装 Git，不需要手动 Clone 仓库。
+- **一键部署**：智能体检测到新环境时，会自动提供系统原生指令（PowerShell/Curl），**一键拉取并配置**所有核心技能。
 
-### 2. 👁️ 全网知识获取 (Web-Aware Learning)
-- **智能路由**：集成 `Fetch` (轻量)、`Playwright` (抗反爬) 和 `Context7` (官方文档)。
-- **一键挂载**：发送 URL（如博客、教程）或关键词（如 "React Docs"），智能体自动抓取清洗，转化为学习素材。
+### 2. 👁️ 全网智能感知 (Intelligent Web-Awareness)
+- **多模态读取**：集成了三大 MCP 工具，自动路由最佳方案：
+  - **Fetch**: 秒级抓取轻量级博客/文档。
+  - **Playwright**: 攻克动态渲染和反爬虫严重的复杂网页。
+  - **Context7**: 直接连接官方文档库（如 React, Python 官方文档），获取最权威解释。
 
-### 3. 🗺️ 自动化课程设计 (Curriculum Designer)
-- **路书生成**：根据抓取的内容，自动生成分步学习计划 `book/roadmap.md`。
-- **断点续学**：智能维护学习状态。下次回来只需说“继续”，它自动检查 `[x]` 标记，带你进入下一章。
+### 3. 🗺️ 动态路书系统 (Dynamic Roadmap)
+- **自动规划**：扔给它一个 URL，它自动生成分阶段的 `book/roadmap.md` 学习计划。
+- **状态追踪**：内置 `ProgressManager`，自动记录 `[x]` 完成状态。哪怕隔了一周再回来，只需说“继续学习”，它也能精准接上进度。
 
-### 4. 📚 知识闭环 (Knowledge Loop)
-- **实战演练**：引导在 `test/` 目录编写代码，提供 Code Review。
-- **自动归档**：学习结束后自动生成 Markdown 笔记存入 `book/`，并更新路书进度。
+### 4. 🧩 技能热插拔 (Skill Sideloading)
+- 支持将 `.md` 格式的技能文件直接拖入对话框，智能体可实时解析并安装新能力，无需重启。
 
 ---
 
-## 📂 目录结构 (Directory Structure)
+## 📂 技能架构 (Skill Matrix)
 
-```text
-.
-├── .trae/
-│   └── skills/                 # [核心] 智能体的技能库
-│       ├── TutorialLoader/     # 爬虫与文档加载器
-│       ├── CurriculumDesigner/ # 课程规划师
-│       ├── ProgressManager/    # 进度与状态管理器
-│       └── KnowledgeArchivist/ # 笔记归档员
-├── book/                       # [自动生成] 存放学习路书(roadmap.md)和笔记
-├── test/                       # [用户空间] 用于编写练习代码
-└── README.md                   # 项目说明文档
+我们的智能体由以下 4 个原子化技能驱动：
 
-```
+| 技能名称 | 路径 | 核心职责 | 依赖工具 |
+| :--- | :--- | :--- | :--- |
+| **TutorialLoader** | `.trae/skills/TutorialLoader` | **[入口]** 联网抓取教程/文档，清洗数据。 | Fetch, Playwright, Context7 |
+| **CurriculumDesigner** | `.trae/skills/CurriculumDesigner` | **[大脑]** 将清洗后的文本转化为结构化路书。 | (Native) |
+| **ProgressManager** | `.trae/skills/ProgressManager` | **[记忆]** 读取/更新 `roadmap.md` 的 Checkbox 状态。 | (Native) |
+| **KnowledgeArchivist** | `.trae/skills/KnowledgeArchivist` | **[归档]** 生成学习笔记，触发进度打钩。 | (Native) |
 
 ---
 
 ## 🚀 快速开始 (Quick Start)
 
-### 1. 环境准备
+### Step 1: 准备环境
+确保你的 Trae IDE 已开启 **MCP 功能**，并建议开启以下工具以获得最佳体验：
+- ✅ `github.com` (可选，仅用于高级同步)
+- ✅ `fetch` (必须)
+- ✅ `playwright` (强烈推荐)
+- ✅ `context7` (推荐，用于查官方文档)
 
-确保你的 Trae IDE 已安装并配置好以下 MCP 工具：
-
-* ✅ **GitHub** (用于同步技能)
-* ✅ **Fetch** (基础网页抓取)
-* ✅ **Playwright** (高级网页抓取)
-* ✅ **Context7** (官方文档检索)
-
-### 2. 启动智能体
-
-在 Trae 对话框中输入：
-
+### Step 2: 唤醒导师
+在 Trae 的对话框中输入：
 > **"初始化环境"**
 
-智能体将自动检查本地状态，并从 `CodeManYsf/cyysf-trae-skills` 下载核心技能。
+*智能体将检测你的环境。如果是新电脑，它会提供一行代码，点击运行即可完成部署。*
 
-### 3. 开始学习
+### Step 3: 开始学习流程
+**场景 A：我要学这个网页**
+> "帮我制定这个教程的学习计划：https://example.com/learn-python"
 
-**方式 A：基于现有教程**
+**场景 B：我要查官方文档**
+> "教我 Pandas 的数据清洗功能" (智能体将自动调用 Context7 查阅文档)
 
-> "我想学这篇文章：https://www.google.com/search?q=https://example.com/python-tutorial"
-
-**方式 B：基于关键词（查文档）**
-
-> "教我 Python Pandas 的基础用法"
-
-**方式 C：继续之前的进度**
-
-> "我学到哪了？继续学习。"
+**场景 C：继续昨天的进度**
+> "继续学习" (智能体将读取 `roadmap.md` 并发布今天的任务)
 
 ---
 
-## 🛠️ 技能清单 (Skills Matrix)
-
-| 技能名称 | 触发条件 | 核心职责 |
-| --- | --- | --- |
-| **TutorialLoader** | 输入 URL 或 "教我..." | 路由 Fetch/Playwright/Context7，清洗数据并移交规划。 |
-| **CurriculumDesigner** | 接收清洗后的文本 | 生成或追加 `book/roadmap.md`，拆解学习阶段。 |
-| **ProgressManager** | "继续学习" / 任务完成 | 读取/更新 `roadmap.md` 中的 Checkbox 状态。 |
-| **KnowledgeArchivist** | "学会了" / 代码跑通 | 生成总结笔记，并触发进度打钩。 |
+## 📝 目录规范
+- `book/` : 存放自动生成的 `roadmap.md` 和学习笔记。
+- `test/` : 你的代码练习场（智能体会在此目录下 Review 你的代码）。
+- `.trae/skills/` : 智能体的技能库（请勿手动修改，除非通过侧载更新）。
 
 ---
 
-## 📝 License
-
+## 📜 License
 MIT License © 2026 CodeManYsf
-
-```
